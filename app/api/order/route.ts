@@ -14,9 +14,6 @@ interface OrderPayload {
   phone: string;
 }
 
-const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
 /** Экранирование спецсимволов для parse_mode: HTML */
 function escapeHtml(s: string): string {
   return s
@@ -93,22 +90,25 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (!BOT_TOKEN || !CHAT_ID) {
+  // Читаем env в рантайме (важно для serverless-хостингов)
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
     console.error("TELEGRAM_BOT_TOKEN или TELEGRAM_CHAT_ID не заданы");
     return NextResponse.json(
       { ok: false, error: "Сервис заказов не настроен" },
       { status: 500 }
     );
   }
-
   try {
     const res = await fetch(
-      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: CHAT_ID,
+          chat_id: chatId,
           text: buildMessage(body),
           parse_mode: "HTML",
         }),
