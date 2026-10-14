@@ -64,9 +64,9 @@ const items: Draft[] = [
   { slug: "boldenone-zphc", brand: "ЗПХ", name: "Болденон", category: "БОЛДЕНОН", price: 3400, inStock: true },
 
   // ===== Тренболон =====
-  { slug: "trenbolone-acetate-pharmagen", brand: "Фармаген", name: "Тренболон Ацетат", category: "ТРЕНБОЛОН", price: 2500, inStock: true },
-  { slug: "trenbolone-acetate-swiss", brand: "Свисс", name: "Тренболон Ацетат", category: "ТРЕНБОЛОН", price: 2300, inStock: true },
-  { slug: "trenbolone-acetate-zphc", brand: "ЗПХ", name: "Тренболон Ацетат", category: "ТРЕНБОЛОН", price: 2100, inStock: true },
+  { slug: "trenbolone-acetate-pharmagen", brand: "Фармаген", name: "Тренболон Ацетат", category: "ТРЕНБОЛОН", price: 3800, inStock: true },
+  { slug: "trenbolone-acetate-swiss", brand: "Свисс", name: "Тренболон Ацетат", category: "ТРЕНБОЛОН", price: 3500, inStock: true },
+  { slug: "trenbolone-acetate-zphc", brand: "ЗПХ", name: "Тренболон Ацетат", category: "ТРЕНБОЛОН", price: 3300, inStock: true },
   { slug: "trenbolone-enanthate-pharmagen", brand: "Фармаген", name: "Тренболон Энантат", category: "ТРЕНБОЛОН", price: 4900, inStock: true },
   { slug: "trenbolone-enanthate-swiss", brand: "Свисс", name: "Тренболон Энантат", category: "ТРЕНБОЛОН", price: 4700, inStock: true },
   { slug: "trenbolone-enanthate-zphc", brand: "ЗПХ", name: "Тренболон Энантат", category: "ТРЕНБОЛОН", price: 4700, inStock: true },
