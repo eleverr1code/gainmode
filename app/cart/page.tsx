@@ -93,7 +93,7 @@ export default function CartPage() {
     }
   };
 
-  if (ordered) {
+  if (ordered && cart.length === 0) {
     return (
       <div className="mx-auto w-full max-w-[900px] px-4 pt-10 pb-28">
         <div className="panel flex flex-col items-center gap-4 py-20 text-center">
@@ -102,12 +102,27 @@ export default function CartPage() {
           <p className="max-w-md text-sm text-muted">
             Менеджер получил заявку и свяжется с вами для подтверждения.
           </p>
-          <Link
-            href="/"
-            className="mt-2 rounded-lg bg-neon px-6 py-3 text-sm font-bold text-background uppercase transition hover:shadow-[0_0_18px_rgba(59,130,246,0.45)]"
-          >
-            Вернуться в каталог
-          </Link>
+          <div className="mt-2 flex flex-wrap justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                setOrdered(false);
+                setShowForm(false);
+                setName("");
+                setPhone("+7 ");
+                setError(null);
+              }}
+              className="rounded-lg bg-neon px-6 py-3 text-sm font-bold text-background uppercase transition hover:shadow-[0_0_18px_rgba(59,130,246,0.45)]"
+            >
+              Заказать ещё раз
+            </button>
+            <Link
+              href="/"
+              className="rounded-lg border border-[var(--border-strong)] px-6 py-3 text-sm font-bold text-neon uppercase transition hover:shadow-[0_0_16px_rgba(59,130,246,0.35)]"
+            >
+              Вернуться в каталог
+            </Link>
+          </div>
         </div>
         <Footer />
       </div>
