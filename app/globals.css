@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0507;
+  --panel: #150a0f;
+  --panel-2: #1e0d13;
+  --border: rgba(255, 45, 77, 0.2);
+  --border-strong: rgba(255, 45, 77, 0.55);
+  --foreground: #f6edef;
+  --muted: #a3898f;
+  --neon: #ff2d4d;
+  --neon-dim: #d3112f;
+  --green: #22e07a;
+  --danger: #ff7a3d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-neon: var(--neon);
+  --color-neon-dim: var(--neon-dim);
+  --color-green: var(--green);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  /* Красная сетка-фон + лёгкий красный радиальный акцент */
+  background-image:
+    linear-gradient(rgba(255, 45, 77, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 45, 77, 0.045) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% -10%, rgba(255, 45, 77, 0.09), transparent 55%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* Технический текст заглавными (статусы, метки) */
+.tech {
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+}
+
+/* Панель с неоновой рамкой */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.glow-neon {
+  box-shadow: 0 0 18px rgba(255, 45, 77, 0.25), inset 0 0 12px rgba(255, 45, 77, 0.05);
+}
+
+.text-glow {
+  text-shadow: 0 0 14px rgba(255, 45, 77, 0.65);
+}
+
+/* Угловые скобки карточек/секций */
+.corner-marks {
+  position: relative;
+}
+.corner-marks::before,
+.corner-marks::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-strong);
+  pointer-events: none;
+}
+.corner-marks::before {
+  top: 8px;
+  left: 8px;
+  border-right: none;
+  border-bottom: none;
+}
+.corner-marks::after {
+  bottom: 8px;
+  right: 8px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Скролл для чипов категорий */
+.chips-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 45, 77, 0.35) transparent;
+}
+.chips-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.chips-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 45, 77, 0.35);
+  border-radius: 9999px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.5s ease both;
+}
