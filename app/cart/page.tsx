@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Trash2, Minus, Plus, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { PRODUCTS } from "@/lib/products";
 import { cartTotals, formatPrice, useShopStore } from "@/store/shop";
@@ -38,6 +38,17 @@ export default function CartPage() {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+7 ");
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const cursorPos = useRef<number | null>(null);
+
+  // Восстановление курсора после reformat/удаления (иначе прыгает в конец)
+  useEffect(() => {
+    const el = phoneRef.current;
+    if (!el || cursorPos.current === null) return;
+    const pos = Math.min(cursorPos.current, el.value.length);
+    el.setSelectionRange(pos, pos);
+    cursorPos.current = null;
+  }, [phone]);
 
   const fieldCls =
     "rounded-lg border border-[var(--border)] bg-panel-2 px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:shadow-[0_0_14px_rgba(59,130,246,0.25)]";
@@ -48,6 +59,52 @@ export default function CartPage() {
   });
 
   const { count, total } = cartTotals(cart, PRODUCTS);
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const el = e.currentTarget;
+    const value = el.value;
+    const inputType = (e.nativeEvent as InputEvent).inputType ?? "";
+    const selStart = el.selectionStart ?? value.length;
+    const selEnd = el.selectionEnd ?? selStart;
+    const isDelete =
+      inputType.startsWith("deleteContent") || inputType.startsWith("deleteBy");
+
+    // Удаление: убираем символы как есть, маску не пересобираем —
+    // иначе разделители «возвращаются» и стереть их невозможно
+    if (isDelete) {
+      let next = value;
+      let cursor = selStart;
+      if (selStart !== selEnd) {
+        next = value.slice(0, selStart) + value.slice(selEnd);
+      } else if (inputType === "deleteContentForward") {
+        next = value.slice(0, selStart) + value.slice(selStart + 1);
+      } else {
+        const i = selStart - 1;
+        next = i >= 0 ? value.slice(0, i) + value.slice(i + 1) : value;
+        cursor = Math.max(0, i);
+      }
+      setPhone(next);
+      cursorPos.current = cursor;
+      return;
+    }
+
+    // Ввод/вставка: пересобираем маску, курсор — после последней введённой цифры
+    const digitsBefore = value.slice(0, selStart).replace(/\D/g, "").length;
+    const formatted = formatPhone(value);
+    let seen = 0;
+    let pos = formatted.length;
+    for (let i = 0; i < formatted.length; i++) {
+      if (/\d/.test(formatted[i])) {
+        seen += 1;
+        if (seen === digitsBefore) {
+          pos = i + 1;
+          break;
+        }
+      }
+    }
+    setPhone(formatted);
+    cursorPos.current = pos;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -264,10 +321,11 @@ export default function CartPage() {
               <label className="flex flex-col gap-2">
                 <span className="tech text-muted">телефон *</span>
                 <input
+                  ref={phoneRef}
                   type="tel"
                   inputMode="tel"
                   value={phone}
-                  onChange={(e) => setPhone(formatPhone(e.target.value))}
+                  onChange={handlePhoneChange}
                   placeholder="+7 (___) ___-__-__"
                   autoComplete="tel"
                   className={fieldCls}
