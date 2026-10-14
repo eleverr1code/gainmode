@@ -2,30 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Trash2, Minus, Plus, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { PRODUCTS } from "@/lib/products";
 import { cartTotals, formatPrice, useShopStore } from "@/store/shop";
 import { Footer } from "@/components/layout/Footer";
 
 type Line = { qty: number; productId: string };
-
-/** Форматирование телефона в вид +7 (999) 123-45-67 */
-function formatPhone(raw: string): string {
-  let d = raw.replace(/\D/g, "");
-  if (d.startsWith("8")) d = "7" + d.slice(1);
-  if (!d) return "+7 ";
-  if (!d.startsWith("7")) d = "7" + d;
-  d = d.slice(0, 11);
-  const p = d.slice(1);
-  let out = "+7";
-  if (p.length >= 1) out += " (" + p.slice(0, 3);
-  if (p.length === 3) out += ")";
-  if (p.length > 3) out += ") " + p.slice(3, 6);
-  if (p.length >= 6) out += "-" + p.slice(6, 8);
-  if (p.length >= 8) out += "-" + p.slice(8, 10);
-  return out;
-}
 
 export default function CartPage() {
   const cart = useShopStore((s) => s.cart);
@@ -37,18 +20,7 @@ export default function CartPage() {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("+7 ");
-  const phoneRef = useRef<HTMLInputElement>(null);
-  const cursorPos = useRef<number | null>(null);
-
-  // Восстановление курсора после reformat/удаления (иначе прыгает в конец)
-  useEffect(() => {
-    const el = phoneRef.current;
-    if (!el || cursorPos.current === null) return;
-    const pos = Math.min(cursorPos.current, el.value.length);
-    el.setSelectionRange(pos, pos);
-    cursorPos.current = null;
-  }, [phone]);
+  const [tg, setTg] = useState("");
 
   const fieldCls =
     "rounded-lg border border-[var(--border)] bg-panel-2 px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:shadow-[0_0_14px_rgba(59,130,246,0.25)]";
@@ -60,41 +32,6 @@ export default function CartPage() {
 
   const { count, total } = cartTotals(cart, PRODUCTS);
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const el = e.currentTarget;
-    const value = el.value;
-    const inputType = (e.nativeEvent as InputEvent).inputType ?? "";
-
-    // Удаление: браузер УЖЕ применил его к DOM-значению —
-    // просто принимаем как есть, маску не пересобираем
-    // (иначе разделители «возвращаются», а курсор прыгает)
-    if (
-      inputType.startsWith("deleteContent") ||
-      inputType.startsWith("deleteBy")
-    ) {
-      setPhone(value);
-      return;
-    }
-
-    // Ввод/вставка: пересобираем маску, курсор — после последней введённой цифры
-    const selStart = el.selectionStart ?? value.length;
-    const digitsBefore = value.slice(0, selStart).replace(/\D/g, "").length;
-    const formatted = formatPhone(value);
-    let seen = 0;
-    let pos = formatted.length;
-    for (let i = 0; i < formatted.length; i++) {
-      if (/\d/.test(formatted[i])) {
-        seen += 1;
-        if (seen === digitsBefore) {
-          pos = i + 1;
-          break;
-        }
-      }
-    }
-    setPhone(formatted);
-    cursorPos.current = pos;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -103,8 +40,8 @@ export default function CartPage() {
       setError("Укажите имя");
       return;
     }
-    if (phone.replace(/\D/g, "").length < 11) {
-      setError("Укажите корректный номер телефона");
+    if (tg.trim().replace(/^@+/, "").length < 3) {
+      setError("Укажите username в Telegram");
       return;
     }
 
@@ -122,7 +59,7 @@ export default function CartPage() {
           })),
           total,
           name: name.trim(),
-          phone: phone.trim(),
+          tg: tg.trim().replace(/^@+/, ""),
         }),
       });
       const data = await res.json();
@@ -155,7 +92,7 @@ export default function CartPage() {
                 setOrdered(false);
                 setShowForm(false);
                 setName("");
-                setPhone("+7 ");
+                setTg("");
                 setError(null);
               }}
               className="rounded-lg bg-neon px-6 py-3 text-sm font-bold text-background uppercase transition hover:shadow-[0_0_18px_rgba(59,130,246,0.45)]"
@@ -308,15 +245,12 @@ export default function CartPage() {
                 />
               </label>
               <label className="flex flex-col gap-2">
-                <span className="tech text-muted">телефон *</span>
+                <span className="tech text-muted">telegram *</span>
                 <input
-                  ref={phoneRef}
-                  type="tel"
-                  inputMode="tel"
-                  value={phone}
-                  onChange={handlePhoneChange}
-                  placeholder="+7 (___) ___-__-__"
-                  autoComplete="tel"
+                  value={tg}
+                  onChange={(e) => setTg(e.target.value)}
+                  placeholder="@username"
+                  autoComplete="username"
                   className={fieldCls}
                 />
               </label>

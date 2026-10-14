@@ -11,7 +11,7 @@ interface OrderPayload {
   items: OrderItem[];
   total: number;
   name: string;
-  phone: string;
+  tg: string;
 }
 
 /** Экранирование спецсимволов для parse_mode: HTML */
@@ -44,7 +44,7 @@ function buildMessage(order: OrderPayload): string {
     "🛒 <b>Новый заказ — Gain Mode Pharma</b>",
     "",
     `👤 Имя: <b>${escapeHtml(order.name)}</b>`,
-    `📞 Телефон: <b>${escapeHtml(order.phone)}</b>`,
+    `✈️ Telegram: <b>@${escapeHtml(order.tg)}</b>`,
     "",
     "<b>Товары:</b>",
     ...lines,
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
   }
 
   const name = String(body.name ?? "").trim();
-  const phone = String(body.phone ?? "").trim();
+  const tg = String(body.tg ?? "").trim().replace(/^@+/, "");
 
   if (name.length < 2) {
     return NextResponse.json(
@@ -83,9 +83,9 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-  if (phone.replace(/\D/g, "").length < 10) {
+  if (tg.length < 3) {
     return NextResponse.json(
-      { ok: false, error: "Укажите корректный телефон" },
+      { ok: false, error: "Укажите username в Telegram" },
       { status: 400 }
     );
   }
