@@ -64,31 +64,20 @@ export default function CartPage() {
     const el = e.currentTarget;
     const value = el.value;
     const inputType = (e.nativeEvent as InputEvent).inputType ?? "";
-    const selStart = el.selectionStart ?? value.length;
-    const selEnd = el.selectionEnd ?? selStart;
-    const isDelete =
-      inputType.startsWith("deleteContent") || inputType.startsWith("deleteBy");
 
-    // Удаление: убираем символы как есть, маску не пересобираем —
-    // иначе разделители «возвращаются» и стереть их невозможно
-    if (isDelete) {
-      let next = value;
-      let cursor = selStart;
-      if (selStart !== selEnd) {
-        next = value.slice(0, selStart) + value.slice(selEnd);
-      } else if (inputType === "deleteContentForward") {
-        next = value.slice(0, selStart) + value.slice(selStart + 1);
-      } else {
-        const i = selStart - 1;
-        next = i >= 0 ? value.slice(0, i) + value.slice(i + 1) : value;
-        cursor = Math.max(0, i);
-      }
-      setPhone(next);
-      cursorPos.current = cursor;
+    // Удаление: браузер УЖЕ применил его к DOM-значению —
+    // просто принимаем как есть, маску не пересобираем
+    // (иначе разделители «возвращаются», а курсор прыгает)
+    if (
+      inputType.startsWith("deleteContent") ||
+      inputType.startsWith("deleteBy")
+    ) {
+      setPhone(value);
       return;
     }
 
     // Ввод/вставка: пересобираем маску, курсор — после последней введённой цифры
+    const selStart = el.selectionStart ?? value.length;
     const digitsBefore = value.slice(0, selStart).replace(/\D/g, "").length;
     const formatted = formatPhone(value);
     let seen = 0;
