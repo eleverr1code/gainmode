@@ -22,16 +22,16 @@ export function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <article className="panel group flex flex-col overflow-hidden transition hover:border-[var(--border-strong)] hover:shadow-[0_0_20px_rgba(255,45,77,0.18)]">
+    <article className="panel group flex flex-col overflow-hidden transition hover:border-[var(--border-strong)] hover:shadow-[0_0_20px_rgba(59,130,246,0.18)]">
       {/* Изображение + избранное */}
-      <div className="relative aspect-square bg-[#120709]">
+      <div className="relative aspect-square bg-[#0c1a2e]">
         <button
           type="button"
           aria-label={
             isFav ? "Убрать из избранного" : "Добавить в избранное"
           }
           onClick={() => toggleFavorite(product.id)}
-          className="absolute top-3 left-3 z-10 grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] bg-[rgba(5,9,12,0.8)] transition hover:border-[var(--border-strong)]"
+          className="absolute top-3 left-3 z-10 grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] bg-[rgba(10,21,38,0.8)] transition hover:border-[var(--border-strong)]"
         >
           <Heart
             className={[
@@ -81,7 +81,7 @@ export function ProductCard({ product }: { product: Product }) {
               "grid h-11 w-11 shrink-0 place-items-center rounded-xl border transition",
               added
                 ? "border-green bg-green/15 text-green"
-                : "border-[var(--border)] text-neon hover:border-[var(--border-strong)] hover:shadow-[0_0_14px_rgba(255,45,77,0.3)]",
+                : "border-[var(--border)] text-neon hover:border-[var(--border-strong)] hover:shadow-[0_0_14px_rgba(59,130,246,0.3)]",
             ].join(" ")}
           >
             {added ? (

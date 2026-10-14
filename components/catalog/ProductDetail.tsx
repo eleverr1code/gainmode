@@ -35,12 +35,12 @@ export function ProductDetail({ product }: { product: Product }) {
 
       <div className="panel corner-marks grid gap-0 overflow-hidden lg:grid-cols-2">
         {/* Изображение */}
-        <div className="relative aspect-square bg-[#120709]">
+        <div className="relative aspect-square bg-[#0c1a2e]">
           <button
             type="button"
             aria-label={isFav ? "Убрать из избранного" : "В избранное"}
             onClick={() => toggleFavorite(product.id)}
-            className="absolute top-4 left-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-[var(--border)] bg-[rgba(5,9,12,0.8)] transition hover:border-[var(--border-strong)]"
+            className="absolute top-4 left-4 z-10 grid h-11 w-11 place-items-center rounded-full border border-[var(--border)] bg-[rgba(10,21,38,0.8)] transition hover:border-[var(--border-strong)]"
           >
             <Heart
               className={
@@ -107,7 +107,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 "flex items-center gap-2.5 rounded-lg px-7 py-4 text-sm font-extrabold uppercase transition",
                 added
                   ? "bg-green text-background"
-                  : "bg-neon text-background hover:shadow-[0_0_22px_rgba(255,45,77,0.55)]",
+                  : "bg-neon text-background hover:shadow-[0_0_22px_rgba(59,130,246,0.55)]",
               ].join(" ")}
             >
               {added ? (
@@ -122,7 +122,7 @@ export function ProductDetail({ product }: { product: Product }) {
             </button>
             <Link
               href="/cart"
-              className="flex items-center gap-2 rounded-lg border border-[var(--border-strong)] px-7 py-4 text-sm font-bold uppercase text-neon transition hover:shadow-[0_0_16px_rgba(255,45,77,0.35)]"
+              className="flex items-center gap-2 rounded-lg border border-[var(--border-strong)] px-7 py-4 text-sm font-bold uppercase text-neon transition hover:shadow-[0_0_16px_rgba(59,130,246,0.35)]"
             >
               перейти в корзину
             </Link>

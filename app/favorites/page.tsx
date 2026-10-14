@@ -33,7 +33,7 @@ export default function FavoritesPage() {
           </p>
           <Link
             href="/"
-            className="mt-2 rounded-lg border border-[var(--border-strong)] px-6 py-2.5 text-sm font-bold text-neon transition hover:shadow-[0_0_16px_rgba(255,45,77,0.35)]"
+            className="mt-2 rounded-lg border border-[var(--border-strong)] px-6 py-2.5 text-sm font-bold text-neon transition hover:shadow-[0_0_16px_rgba(59,130,246,0.35)]"
           >
             Перейти в каталог
           </Link>

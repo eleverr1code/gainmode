@@ -42,7 +42,7 @@ export function Header() {
   const mounted = useMounted();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[rgba(10,5,7,0.92)] backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[rgba(10,21,38,0.92)] backdrop-blur-md">
       <div className="mx-auto flex max-w-[1400px] items-center gap-4 px-4 py-3 lg:px-8">
         {/* Статус-декор слева (только на больших экранах) */}
         <div className="hidden shrink-0 flex-col gap-1 xl:flex">
@@ -75,7 +75,7 @@ export function Header() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Поиск препаратов..."
-            className="w-full rounded-lg border border-[var(--border)] bg-panel-2 py-2.5 pr-4 pl-10 text-sm outline-none transition focus:border-[var(--border-strong)] focus:shadow-[0_0_14px_rgba(255,45,77,0.25)]"
+            className="w-full rounded-lg border border-[var(--border)] bg-panel-2 py-2.5 pr-4 pl-10 text-sm outline-none transition focus:border-[var(--border-strong)] focus:shadow-[0_0_14px_rgba(59,130,246,0.25)]"
           />
         </label>
 

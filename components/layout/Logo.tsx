@@ -25,7 +25,7 @@ export function Logo({
     />
   );
 
-  const glow = "drop-shadow-[0_0_10px_rgba(255,45,77,0.45)]";
+  const glow = "drop-shadow-[0_0_10px_rgba(59,130,246,0.45)]";
 
   if (!withPlaque) {
     // Круглый медальон: квадратное изображение обрезается по кругу,

@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0507;
-  --panel: #150a0f;
-  --panel-2: #1e0d13;
-  --border: rgba(255, 45, 77, 0.2);
-  --border-strong: rgba(255, 45, 77, 0.55);
-  --foreground: #f6edef;
-  --muted: #a3898f;
-  --neon: #ff2d4d;
-  --neon-dim: #d3112f;
+  --background: #0a1526;
+  --panel: #0f1e33;
+  --panel-2: #14263f;
+  --border: rgba(59, 130, 246, 0.22);
+  --border-strong: rgba(96, 165, 250, 0.55);
+  --foreground: #eaf2fb;
+  --muted: #8ba3bd;
+  --neon: #3d8bfd;
+  --neon-dim: #1d5fd6;
   --green: #22e07a;
-  --danger: #ff7a3d;
+  --danger: #ff5470;
 }
 
 @theme inline {
@@ -36,11 +36,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  /* Красная сетка-фон + лёгкий красный радиальный акцент */
+  /* Синяя сетка-фон + лёгкий синий радиальный акцент */
   background-image:
-    linear-gradient(rgba(255, 45, 77, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 45, 77, 0.045) 1px, transparent 1px),
-    radial-gradient(ellipse at 50% -10%, rgba(255, 45, 77, 0.09), transparent 55%);
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% -10%, rgba(59, 130, 246, 0.12), transparent 55%);
   background-size: 48px 48px, 48px 48px, 100% 100%;
   background-attachment: fixed;
 }
@@ -61,11 +61,11 @@ body {
 }
 
 .glow-neon {
-  box-shadow: 0 0 18px rgba(255, 45, 77, 0.25), inset 0 0 12px rgba(255, 45, 77, 0.05);
+  box-shadow: 0 0 18px rgba(59, 130, 246, 0.25), inset 0 0 12px rgba(59, 130, 246, 0.05);
 }
 
 .text-glow {
-  text-shadow: 0 0 14px rgba(255, 45, 77, 0.65);
+  text-shadow: 0 0 14px rgba(59, 130, 246, 0.65);
 }
 
 /* Угловые скобки карточек/секций */
@@ -97,13 +97,13 @@ body {
 /* Скролл для чипов категорий */
 .chips-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 45, 77, 0.35) transparent;
+  scrollbar-color: rgba(59, 130, 246, 0.35) transparent;
 }
 .chips-scroll::-webkit-scrollbar {
   height: 6px;
 }
 .chips-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 45, 77, 0.35);
+  background: rgba(59, 130, 246, 0.35);
   border-radius: 9999px;
 }
 

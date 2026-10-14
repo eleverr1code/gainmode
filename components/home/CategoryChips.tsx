@@ -23,7 +23,7 @@ export function CategoryChips() {
             className={[
               "shrink-0 rounded-md border px-5 py-2.5 text-xs font-bold tracking-widest uppercase transition",
               active
-                ? "border-[var(--border-strong)] bg-neon/12 text-neon shadow-[0_0_14px_rgba(255,45,77,0.3)]"
+                ? "border-[var(--border-strong)] bg-neon/12 text-neon shadow-[0_0_14px_rgba(59,130,246,0.3)]"
                 : "border-[var(--border)] bg-panel-2 text-muted hover:border-[var(--border-strong)] hover:text-foreground",
             ].join(" ")}
           >

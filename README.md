@@ -5,7 +5,7 @@
 ## Стек
 
 - **Next.js 16** (App Router, Cache Components) + **TypeScript**
-- **Tailwind CSS v4** — дизайн-токены в `app/globals.css` (`--neon: #ff2d4d`)
+- **Tailwind CSS v4** — дизайн-токены в `app/globals.css` (`--neon: #3d8bfd`)
 - **Zustand** (+ persist) — корзина / избранное / категория / поиск
 - **lucide-react** — иконки
 
@@ -38,7 +38,18 @@ scripts/     recolor.mjs
 
 ## Данные
 
-Каталог — актуальный прайс в `lib/products.ts` (61 позиция: тестостероны, нандролоны, мастероны, болденон, тренболоны, оралы, ГР, пептиды). Фото пока нет — используется общая плашка `public/products/no-photo.svg`; при появлении реальных фото положите их в `public/products/` и обновите поле `image`. Логотип — векторная реконструкция фирменного знака в `components/layout/Logo.tsx` (красный металлик вместо золота, тёмная плашка в стиле панелей сайта).
+Каталог — актуальный прайс в `lib/products.ts` (61 позиция: тестостероны, нандролоны, мастероны, болденон, тренболоны, оралы, ГР, пептиды). Фото пока нет — используется общая плашка `public/products/no-photo.svg`; при появлении реальных фото положите их в `public/products/` и обновите поле `image`. Логотип — `public/logo.png` (синий вариант вашего знака).
+
+## Заказы через Telegram-бот
+
+Оформление заказа в корзине (`Оформить заказ` → модалка с именем и телефоном) отправляет уведомление менеджеру через API-роут `app/api/order/route.ts` → Telegram Bot API.
+
+Настройка: скопируйте `.env.example` в `.env.local` и заполните:
+
+- `TELEGRAM_BOT_TOKEN` — токен бота от [@BotFather](https://t.me/BotFather)
+- `TELEGRAM_CHAT_ID` — chat_id менеджера (узнать у [@userinfobot](https://t.me/userinfobot) после `/start` боту)
+
+`.env.local` в git не попадает. После изменения env перезапустите `npm run dev`.
 
 ## Дальнейшие шаги
 

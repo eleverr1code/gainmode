@@ -23,7 +23,7 @@ export function Hero() {
     <section className="panel corner-marks animate-fade-up relative overflow-hidden">
       {/* Диагональный красный акцент */}
       <div
-        className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rotate-45 bg-[linear-gradient(135deg,rgba(255,45,77,0.35),transparent_70%)] blur-2xl"
+        className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rotate-45 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),transparent_70%)] blur-2xl"
         aria-hidden
       />
 
@@ -49,13 +49,13 @@ export function Hero() {
           <div className="flex flex-wrap gap-3">
             <Link
               href="/#catalog"
-              className="flex items-center gap-2.5 rounded-lg bg-neon px-8 py-4 text-sm font-extrabold text-background uppercase transition hover:shadow-[0_0_24px_rgba(255,45,77,0.55)]"
+              className="flex items-center gap-2.5 rounded-lg bg-neon px-8 py-4 text-sm font-extrabold text-background uppercase transition hover:shadow-[0_0_24px_rgba(59,130,246,0.55)]"
             >
               В каталог <ArrowDown className="h-4 w-4" />
             </Link>
             <Link
               href="/cart"
-              className="rounded-lg border border-[var(--border-strong)] px-8 py-4 text-sm font-bold text-neon uppercase transition hover:shadow-[0_0_16px_rgba(255,45,77,0.35)]"
+              className="rounded-lg border border-[var(--border-strong)] px-8 py-4 text-sm font-bold text-neon uppercase transition hover:shadow-[0_0_16px_rgba(59,130,246,0.35)]"
             >
               Корзина
             </Link>
@@ -76,13 +76,13 @@ export function Hero() {
 
         {/* Правая часть — визуал: монограмма + ЭКГ */}
         <div className="relative min-h-[280px] overflow-hidden border-t border-[var(--border)] bg-panel-2 lg:min-h-[460px] lg:border-t-0 lg:border-l">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_45%,rgba(255,45,77,0.22),transparent_65%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_45%,rgba(59,130,246,0.22),transparent_65%)]" />
 
           {/* Фирменный знак в кольцах */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="relative grid h-44 w-44 place-items-center sm:h-56 sm:w-56">
               {/* Подлож под круглым логотипом — гасит кромку квадратного фона */}
-              <div className="absolute inset-6 rounded-full bg-[radial-gradient(circle,#0a0507_55%,rgba(10,5,7,0.65)_75%,transparent_100%)] blur-md" />
+              <div className="absolute inset-6 rounded-full bg-[radial-gradient(circle,#0a1526_55%,rgba(10,21,38,0.65)_75%,transparent_100%)] blur-md" />
               <div className="absolute inset-0 rounded-full border-2 border-[var(--border-strong)]" />
               <div className="absolute inset-5 rounded-full border border-dashed border-[var(--border)] animate-spin-slow" />
               <Logo size={112} withPlaque={false} />
@@ -91,7 +91,7 @@ export function Hero() {
 
           {/* Штриховой паттерн */}
           <div
-            className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(-45deg,transparent_0_14px,rgba(255,45,77,0.18)_14px_15px)]"
+            className="absolute inset-0 opacity-25 [background-image:repeating-linear-gradient(-45deg,transparent_0_14px,rgba(59,130,246,0.18)_14px_15px)]"
             aria-hidden
           />
 
