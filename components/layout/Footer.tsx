@@ -10,14 +10,6 @@ const columns = [
     ],
   },
   {
-    title: "Покупателям",
-    links: [
-      { label: "Доставка и оплата", href: "/#catalog" },
-      { label: "Гарантии качества", href: "/#catalog" },
-      { label: "Возврат", href: "/#catalog" },
-    ],
-  },
-  {
     title: "Связь",
     links: [{ label: "Telegram", href: "https://t.me/@ShaDelf_zakaz" }],
   },
