@@ -19,7 +19,7 @@ const columns = [
   },
   {
     title: "Связь",
-    links: [{ label: "Telegram", href: "https://t.me/+ShaDelf_zakaz" }],
+    links: [{ label: "Telegram", href: "https://t.me/@ShaDelf_zakaz" }],
   },
 ];
 
