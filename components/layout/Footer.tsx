@@ -32,13 +32,13 @@ export function Footer() {
         </div>
 
         {columns.map((col) => (
-          <nav key={col.title} className="flex flex-col gap-2.5">
-            <span className="tech mb-1 text-neon">{col.title}</span>
+          <nav key={col.title} className="flex flex-col gap-1.5">
+            <span className="tech mb-0.5 text-neon text-sm">{col.title}</span>
             {col.links.map((l) => (
               <a
                 key={l.label}
                 href={l.href}
-                className="text-sm text-muted transition hover:text-neon"
+                className="text-xs text-muted transition hover:text-neon"
               >
                 {l.label}
               </a>
