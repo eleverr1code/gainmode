@@ -1,4 +1,4 @@
-import { Logo } from "./Logo";
+﻿import { Logo } from "./Logo";
 
 const columns = [
   {
@@ -19,7 +19,7 @@ const columns = [
   },
   {
     title: "Связь",
-    links: [{ label: "Telegram", href: "https://t.me/" }],
+    links: [{ label: "Telegram", href: "https://t.me/+ShaDelf_zakaz" }],
   },
 ];
 
@@ -67,3 +67,4 @@ export function Footer() {
     </footer>
   );
 }
+
